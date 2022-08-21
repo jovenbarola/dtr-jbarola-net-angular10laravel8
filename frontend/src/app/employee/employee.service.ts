@@ -4,15 +4,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {  Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { Person } from './person';
+import { Employee } from './employee';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PersonService {
+export class EmployeeService {
 
-  private apiURL = environment.apiUrl + "/person/";
+  private apiURL = environment.apiUrl + "/employee/";
 
   httpOptions = {
     headers: new HttpHeaders({
@@ -23,36 +23,36 @@ export class PersonService {
  constructor(private httpClient: HttpClient) { }
 
 
-  getAll(): Observable<Person[]> {
-    return this.httpClient.get<Person[]>(this.apiURL)
+  getAll(): Observable<Employee[]> {
+    return this.httpClient.get<Employee[]>(this.apiURL)
     .pipe(
       catchError(this.errorHandler)
     )
   }
 
-  create(person): Observable<Person> {
-    return this.httpClient.post<Person>(this.apiURL, JSON.stringify(person), this.httpOptions)
+  create(employee): Observable<Employee> {
+    return this.httpClient.post<Employee>(this.apiURL, JSON.stringify(employee), this.httpOptions)
     .pipe(
       catchError(this.errorHandler)
     )
   }
 
-  find(id): Observable<Person> {
-    return this.httpClient.get<Person>(this.apiURL + id)
+  find(id): Observable<Employee> {
+    return this.httpClient.get<Employee>(this.apiURL + id)
     .pipe(
       catchError(this.errorHandler)
     )
   }
 
-  update(id, person): Observable<Person> {
-    return this.httpClient.put<Person>(this.apiURL + id, JSON.stringify(person), this.httpOptions)
+  update(id, employee): Observable<Employee> {
+    return this.httpClient.put<Employee>(this.apiURL + id, JSON.stringify(employee), this.httpOptions)
     .pipe(
       catchError(this.errorHandler)
     )
   }
 
   delete(id){
-    return this.httpClient.delete<Person>(this.apiURL + id, this.httpOptions)
+    return this.httpClient.delete<Employee>(this.apiURL + id, this.httpOptions)
     .pipe(
       catchError(this.errorHandler)
     )
